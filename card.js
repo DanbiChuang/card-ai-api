@@ -4,6 +4,7 @@ const express = require('express');
 const multer  = require('multer');
 const sharp   = require('sharp');
 const axios   = require('axios');
+const heicConvert = require('heic-convert');
 
 const router  = express.Router();
 const upload  = multer();                // 圖片暫存在 RAM
@@ -20,23 +21,49 @@ const parseCard = (text) => {
   return { company, name, title, email, phone, rawText: text };
 };
 
+// 處理 HEIC 格式的圖片
+const processHeicImage = async (buffer) => {
+  try {
+    const jpegBuffer = await heicConvert({
+      buffer: buffer,
+      format: 'JPEG',
+      quality: 0.8
+    });
+    return jpegBuffer;
+  } catch (error) {
+    console.error('HEIC 轉換失敗:', error);
+    throw new Error('HEIC 格式處理失敗');
+  }
+};
+
 // POST /api/upload
 router.post('/upload', upload.single('file'), async (req, res) => {
   if (!req.file) return res.status(400).send('No file');
 
-  // 1. 壓縮圖片
-  const buf = await sharp(req.file.buffer)
-                 .resize({ width: 1280, withoutEnlargement: true })
-                 .jpeg({ quality: 80 })
-                 .toBuffer();
-
-  // 2. 檢查大小
-  if (buf.length > 600_000) {
-    return res.status(413).json({ err: 'File too large after compress' });
-  }
-
-  // 3. 呼叫 Google Vision OCR
   try {
+    let imageBuffer = req.file.buffer;
+    const fileName = req.file.originalname.toLowerCase();
+    const mimeType = req.file.mimetype.toLowerCase();
+
+    // 檢查是否為 HEIC 格式
+    if (fileName.endsWith('.heic') || fileName.endsWith('.heif') || 
+        mimeType === 'image/heic' || mimeType === 'image/heif') {
+      console.log('檢測到 HEIC 格式，正在轉換...');
+      imageBuffer = await processHeicImage(req.file.buffer);
+    }
+
+    // 1. 壓縮圖片
+    const buf = await sharp(imageBuffer)
+                   .resize({ width: 1280, withoutEnlargement: true })
+                   .jpeg({ quality: 80 })
+                   .toBuffer();
+
+    // 2. 檢查大小
+    if (buf.length > 600_000) {
+      return res.status(413).json({ err: 'File too large after compress' });
+    }
+
+    // 3. 呼叫 Google Vision OCR
     const visionResp = await axios.post(
       `https://vision.googleapis.com/v1/images:annotate?key=${process.env.VISION_API_KEY}`,
       {
@@ -54,6 +81,11 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   } catch (err) {
     // 新增這一行，把整包回傳 JSON 印出來
     console.error('Vision response:', err.response?.data || err.message);
+    
+    if (err.message === 'HEIC 格式處理失敗') {
+      return res.status(400).json({ err: 'HEIC 格式處理失敗，請嘗試其他格式' });
+    }
+    
     return res.status(500).json({ err: 'OCR failed' });
   }
   

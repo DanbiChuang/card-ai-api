@@ -71,10 +71,19 @@ export default function CardReview() {
             <h3 className="text-lg font-semibold text-gray-800">名片圖片</h3>
             <div className="border rounded-lg p-4 bg-gray-50">
               <img
-                src={cardData.imageUrl || URL.createObjectURL(cardData.file)}
+                src={cardData.imageUrl || (cardData.file ? URL.createObjectURL(cardData.file) : '')}
                 alt="名片"
                 className="w-full max-w-sm mx-auto rounded-lg shadow-sm"
+                onError={(e) => {
+                  console.error('圖片載入失敗:', e);
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'block';
+                }}
               />
+              <div className="hidden text-center text-gray-500">
+                <p>圖片載入失敗</p>
+                <p className="text-sm">檔案格式可能不支援</p>
+              </div>
             </div>
           </div>
 

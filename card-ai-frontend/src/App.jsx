@@ -7,6 +7,7 @@ import Profile from './pages/Profile.jsx';
 import Letter from './pages/Letter.jsx';
 import Success from './pages/Success.jsx';
 import OAuth from './pages/OAuth.jsx';
+import TestHeic from './pages/TestHeic.jsx';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/letter" element={<Letter />} />
           <Route path="/success" element={<Success />} />
           <Route path="/oauth2callback" element={<OAuth />} />
+          <Route path="/test-heic" element={<TestHeic />} />
         </Routes>
       </BrowserRouter>
     </Provider>
