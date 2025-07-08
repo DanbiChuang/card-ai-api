@@ -1,0 +1,55 @@
+import { useContext, useEffect, useState } from 'react';
+import { AppCtx } from '../context.jsx';
+import api from '../api';
+
+export default function Letter() {
+  const { card, myRole, letter, setLetter, token, setToken } = useContext(AppCtx);
+  const [loading, setLoading] = useState(!letter);
+
+  useEffect(() => {
+    if (!letter && card) {
+      (async () => {
+        const { data } = await api.post('/generate', {
+          myRole,
+          parsed: card,
+          companyInfo: { name: card.company }
+        });
+        setLetter(data.letter);
+        setLoading(false);
+      })();
+    }
+  }, [card, letter]);
+
+  const send = async () => {
+    if (!token) {
+      // 觸發 Google OAuth (implicit flow)
+      const u = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+      u.searchParams.set('response_type', 'token');
+      u.searchParams.set('client_id', import.meta.env.VITE_GOOGLE_CLIENT_ID);
+      u.searchParams.set('redirect_uri', import.meta.env.VITE_GOOGLE_REDIRECT_URI);
+      u.searchParams.set('scope', 'https://www.googleapis.com/auth/gmail.send');
+      window.location.href = u.toString();
+      return;
+    }
+    await api.post('/send', {
+      access_token: token,
+      toEmail: card.email,
+      subject: '合作提案',
+      body: letter
+    });
+    alert('已寄出！');
+  };
+
+  if (loading) return <div className="p-6">⏳ 產生信件中…</div>;
+
+  return (
+    <div className="p-6 space-y-4">
+      <textarea value={letter} onChange={e=>setLetter(e.target.value)}
+                className="w-full h-96 border p-2" />
+      <button onClick={send}
+              className="px-4 py-2 bg-green-600 text-white rounded">
+        {token ? '寄 出' : 'Google 登入並寄出'}
+      </button>
+    </div>
+  );
+}

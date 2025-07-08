@@ -1,0 +1,22 @@
+import { useContext, useEffect } from 'react';
+import { AppCtx } from '../context.jsx';
+import { useNavigate } from 'react-router-dom';
+
+export default function OAuth() {
+  const { setToken } = useContext(AppCtx);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const t = hash.get('access_token');
+    if (t) {
+      setToken(t);
+      localStorage.setItem('gmail_token', t);
+      nav('/letter');
+    } else {
+      nav('/');
+    }
+  }, []);
+
+  return <div className="p-6">處理登入中…</div>;
+}

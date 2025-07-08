@@ -1,0 +1,40 @@
+// src/pages/Profile.jsx
+import { useState } from 'react';
+import { AppCtx } from '../context.jsx';
+import { useNavigate } from 'react-router-dom';
+
+export default function Profile() {
+  const { cardText, myRole, setMyRole } = React.useContext(AppCtx);
+  const [role, setRole] = useState(myRole);
+  const navigate = useNavigate();
+
+  const next = () => {
+    if (!role) return alert('請輸入身分 / 主合作方向');
+    setMyRole(role);
+    navigate('/letter');    // 下一頁產信（等一下才寫）
+  };
+
+  return (
+    <div className="p-6 space-y-4">
+      <h2 className="font-bold text-lg">OCR 文字</h2>
+      <pre className="p-2 bg-gray-100 rounded">{cardText}</pre>
+
+      <label className="block">
+        <span className="text-sm text-gray-600">我的角色 / 合作方向</span>
+        <input
+          className="mt-1 w-full border rounded px-3 py-2"
+          value={role}
+          onChange={e => setRole(e.target.value)}
+          placeholder="例如：台灣新創 BD..."
+        />
+      </label>
+
+      <button
+        className="px-6 py-2 bg-green-600 text-white rounded"
+        onClick={next}
+      >
+        下一步：產生合作信
+      </button>
+    </div>
+  );
+}
