@@ -1,49 +1,50 @@
-# Cardfly0708
+# Card AI API
 
-A card AI application with both backend API and frontend interface.
+後端 API 服務，提供卡片生成和信件撰寫功能。
 
-## Project Structure
+## 功能
 
-- `card-ai-frontend/` - React frontend application
-- `card.js` - Card-related backend functionality
-- `letter.js` - Letter generation backend functionality
-- `index.js` - Main backend server
-- `send.js` - Email sending functionality
+- 卡片生成 API
+- 信件撰寫 API
+- Google OAuth 整合
+- 圖片處理和轉換
 
-## Features
+## 本地開發
 
-- Card management and processing
-- Letter generation using AI
-- Email functionality
-- React-based frontend interface
+1. 安裝依賴：
+```bash
+npm install
+```
 
-## Setup
+2. 複製環境變數檔案：
+```bash
+cp env.example .env
+```
 
-1. Install dependencies:
-   ```bash
-   npm install
-   cd card-ai-frontend && npm install
-   ```
+3. 設定環境變數（在 .env 檔案中）
 
-2. Start the backend server:
-   ```bash
-   node index.js
-   ```
+4. 啟動開發伺服器：
+```bash
+npm run dev
+```
 
-3. Start the frontend development server:
-   ```bash
-   cd card-ai-frontend
-   npm run dev
-   ```
+## 部署到 Railway
 
-## Technologies Used
+1. 將程式碼推送到 GitHub
+2. 在 Railway 中連接 GitHub 倉庫
+3. 設定環境變數：
+   - `OPENAI_API_KEY`
+   - `VISION_API_KEY`
+   - `GOOGLE_CLIENT_ID`
+   - `GOOGLE_CLIENT_SECRET`
+   - `PORT` (Railway 會自動設定)
 
-- Node.js (Backend)
-- React (Frontend)
-- OpenAI API
-- Express.js
-- Tailwind CSS
+## API 端點
 
-## License
+- `POST /api/card` - 生成卡片
+- `POST /api/letter` - 撰寫信件
+- `GET /api/oauth2callback` - Google OAuth 回調
 
-This project is part of the Cardfly0708 initiative. 
+## 環境變數
+
+請參考 `env.example` 檔案了解所需的環境變數。 
