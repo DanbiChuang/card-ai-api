@@ -1,0 +1,50 @@
+// src/pages/Upload.jsx
+import { useState } from 'react';
+import axios from 'axios';
+import { AppCtx } from '../context.jsx';
+import { useNavigate } from 'react-router-dom';
+
+export default function Upload() {
+  const [file, setFile] = useState(null);
+  const { setCardText } = React.useContext(AppCtx);
+  const navigate = useNavigate();
+
+  const handleUpload = async () => {
+    if (!file) return alert('先選檔');
+    const form = new FormData();
+    form.append('file', file);
+
+    try {
+      const { data } = await axios.post('http://localhost:4000/api/upload', form);
+      // data = { rawText: '...' }
+      setCardText(data.rawText);        // 存進 Context 供下一頁用
+      navigate('/profile');             // 跳到填「我的角色」頁
+    } catch (e) {
+      alert('上傳失敗 ' + e.message);
+    }
+  };
+
+  return (
+    <div className="p-4">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={e => setFile(e.target.files[0])}
+      />
+      <button
+        className="ml-4 px-4 py-1 bg-blue-600 text-white rounded"
+        onClick={handleUpload}
+      >
+        送出
+      </button>
+
+      {file && (
+        <img
+          src={URL.createObjectURL(file)}
+          alt="preview"
+          className="mt-6 max-w-xs"
+        />
+      )}
+    </div>
+  );
+}
