@@ -1,6 +1,6 @@
 // src/pages/Upload.jsx
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import api from '../api.js';
 import { AppCtx } from '../context.jsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -51,7 +51,7 @@ export default function Upload() {
     form.append('file', file);
 
     try {
-      const { data } = await axios.post('http://localhost:4000/api/upload', form);
+      const { data } = await api.post('/upload', form);
       // data = { company, name, title, email, phone, rawText }
       setCardData({ ...data, file: file });
       navigate('/card-review');
@@ -276,25 +276,11 @@ export default function Upload() {
               {/* 操作按鈕 */}
               <div className="space-y-3">
                 <button
-                  onClick={startCamera}
+                  onClick={handleUploadClick}
                   disabled={loading}
                   className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:text-gray-500"
                 >
-                  📸 開啟相機拍攝
-                </button>
-                
-                <div className="flex items-center">
-                  <div className="flex-1 h-px bg-gray-300"></div>
-                  <span className="px-3 text-gray-500 text-sm">或</span>
-                  <div className="flex-1 h-px bg-gray-300"></div>
-                </div>
-                
-                <button
-                  onClick={handleUploadClick}
-                  disabled={loading}
-                  className="w-full py-3 px-4 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors disabled:bg-gray-300 disabled:text-gray-500"
-                >
-                  📁 從相簿選擇
+                  📁 上傳名片照
                 </button>
               </div>
               

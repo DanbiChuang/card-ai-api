@@ -1,8 +1,18 @@
 import axios from 'axios';
 
-// 根據環境設置API基礎URL
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+// 根據環境選擇 API URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://card-ai-api-production.up.railway.app/api';
 
-const api = axios.create({ baseURL });
+// 添加日誌來監測環境變量
+console.log('=== API Configuration Debug ===');
+console.log('VITE_API_URL:', import.meta.env.VITE_API_URL);
+console.log('Final API_URL:', API_URL);
+console.log('Environment:', import.meta.env.MODE);
+console.log('================================');
+
+const api = axios.create({ 
+  baseURL: API_URL,
+  timeout: 30000 // 30秒超時
+});
 
 export default api;
