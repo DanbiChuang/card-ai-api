@@ -35,6 +35,24 @@ export default function CardReview() {
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">確認名片資訊</h1>
           <p className="text-gray-600">請檢查並修正 AI 解析的名片資訊</p>
+          
+          {/* AI處理狀態指示器 */}
+          {cardData.aiProcessed && (
+            <div className="mt-3 inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              AI智能分類
+            </div>
+          )}
+          {!cardData.aiProcessed && cardData.rawText && (
+            <div className="mt-3 inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              備用規則分類
+            </div>
+          )}
         </div>
 
         {/* 步驟導覽 */}
@@ -85,6 +103,19 @@ export default function CardReview() {
                 <p className="text-sm">檔案格式可能不支援</p>
               </div>
             </div>
+            
+            {/* 原始OCR文字顯示 */}
+            {cardData.rawText && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-gray-700">原始OCR文字</h4>
+                <div className="bg-gray-100 p-3 rounded-md text-sm text-gray-600 max-h-32 overflow-y-auto">
+                  <pre className="whitespace-pre-wrap font-mono text-xs">{cardData.rawText}</pre>
+                </div>
+                <p className="text-xs text-gray-500">
+                  AI從以上文字中智能提取了名片資訊
+                </p>
+              </div>
+            )}
           </div>
 
           {/* 編輯區域 */}

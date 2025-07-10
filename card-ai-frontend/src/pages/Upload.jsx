@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import api from '../api.js';
 import { AppCtx } from '../context.jsx';
 import { useNavigate } from 'react-router-dom';
+import AIFeatures from '../components/AIFeatures.jsx';
 
 export default function Upload() {
   const [file, setFile] = useState(null);
@@ -51,8 +52,15 @@ export default function Upload() {
     form.append('file', file);
 
     try {
+      // 顯示AI處理狀態
+      console.log('正在使用AI智能分析名片...');
       const { data } = await api.post('/upload', form);
-      // data = { company, name, title, email, phone, rawText }
+      // data = { company, name, title, email, phone, rawText, aiProcessed }
+      
+      // 檢查是否為AI處理
+      const isAIProcessed = data.aiProcessed;
+      console.log('AI處理狀態:', isAIProcessed ? 'AI智能分類' : '備用規則分類');
+      
       setCardData({ ...data, file: file });
       navigate('/card-review');
     } catch (e) {
@@ -197,6 +205,9 @@ export default function Upload() {
           </div>
         </div>
 
+        {/* AI功能說明 */}
+        <AIFeatures />
+
         {/* 相機拍攝模式 */}
         {showCamera && (
           <div className="fixed inset-0 bg-black z-50 flex flex-col">
@@ -291,17 +302,37 @@ export default function Upload() {
           )}
         </div>
 
-        <button
-          className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-            !file || loading
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-          }`}
-          onClick={handleUpload}
-          disabled={!file || loading}
-        >
-          {loading ? '處理中...' : '開始解析名片'}
-        </button>
+        {/* 上傳按鈕 */}
+        <div className="space-y-4">
+          <button
+            onClick={handleUpload}
+            disabled={!file || loading}
+            className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
+              !file || loading
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                AI智能分析中...
+              </div>
+            ) : (
+              '開始分析名片'
+            )}
+          </button>
+          
+          {loading && (
+            <div className="text-center text-sm text-gray-600">
+              <p>正在使用AI智能分析名片內容...</p>
+              <p className="text-xs mt-1">這可能需要幾秒鐘時間</p>
+            </div>
+          )}
+        </div>
 
         {loading && (
           <div className="mt-4 text-center">
