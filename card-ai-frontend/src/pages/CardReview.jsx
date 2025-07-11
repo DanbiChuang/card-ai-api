@@ -30,8 +30,8 @@ export default function CardReview() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">確認名片資訊</h1>
           <p className="text-gray-600">請檢查並修正 AI 解析的名片資訊</p>
@@ -104,18 +104,7 @@ export default function CardReview() {
               </div>
             </div>
             
-            {/* 原始OCR文字顯示 */}
-            {cardData.rawText && (
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium text-gray-700">原始OCR文字</h4>
-                <div className="bg-gray-100 p-3 rounded-md text-sm text-gray-600 max-h-32 overflow-y-auto">
-                  <pre className="whitespace-pre-wrap font-mono text-xs">{cardData.rawText}</pre>
-                </div>
-                <p className="text-xs text-gray-500">
-                  AI從以上文字中智能提取了名片資訊
-                </p>
-              </div>
-            )}
+
           </div>
 
           {/* 編輯區域 */}

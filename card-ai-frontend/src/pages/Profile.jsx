@@ -12,7 +12,8 @@ export default function Profile() {
     savedRoles, 
     addRole,
     userProfile,
-    setUserProfile
+    setUserProfile,
+    setProfileVersion
   } = React.useContext(AppCtx);
   
   const [role, setRole] = useState(myRole);
@@ -49,6 +50,8 @@ export default function Profile() {
       ...userInfo,
       cooperationContent: cooperationDirection
     });
+    // 增加 Profile 版本，觸發 Letter 頁面重新生成
+    setProfileVersion(prev => prev + 1);
     navigate('/letter');
   };
 
@@ -62,8 +65,8 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">選擇身份</h1>
           <p className="text-gray-600">請填寫您的資訊並選擇合作方向</p>

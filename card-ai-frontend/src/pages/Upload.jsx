@@ -170,15 +170,15 @@ export default function Upload() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Shot2Mail</h1>
-          <p className="text-gray-600">拍攝或上傳名片照片，AI 幫你生成合作提案</p>
+    <div className="min-h-screen bg-white w-full">
+      <div className="max-w-4xl mx-auto px-4 py-8 min-h-screen w-full">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-3">Shot2<i>Mail</i></h1>
+          <p className="text-gray-600 text-lg">拍攝或上傳名片照片，AI 幫你生成合作提案</p>
         </div>
 
         {/* 步驟導覽 */}
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-center mb-8">
           <div className="flex items-center">
             <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</div>
             <div className="text-blue-600 font-medium ml-2">上傳名片</div>
@@ -205,8 +205,7 @@ export default function Upload() {
           </div>
         </div>
 
-        {/* AI功能說明 */}
-        <AIFeatures />
+
 
         {/* 相機拍攝模式 */}
         {showCamera && (
@@ -247,7 +246,7 @@ export default function Upload() {
         )}
 
         {/* 上傳區域 */}
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center mb-4">
+        <div className="border-2 border-dashed border-gray-300 p-8 text-center mb-8 bg-white">
           <input
             ref={fileInputRef}
             type="file"
@@ -281,15 +280,12 @@ export default function Upload() {
             </div>
           ) : (
             <div>
-              <div className="text-4xl mb-2">📷</div>
-              <p className="text-gray-600 mb-4">選擇名片照片</p>
-              
               {/* 操作按鈕 */}
-              <div className="space-y-3">
+              <div className="flex justify-center">
                 <button
                   onClick={handleUploadClick}
                   disabled={loading}
-                  className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:text-gray-500"
+                  className="py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:text-gray-500"
                 >
                   📁 上傳名片照
                 </button>
@@ -301,9 +297,13 @@ export default function Upload() {
             </div>
           )}
         </div>
+        {/* AI功能說明 */}
+        <div className="mb-8">
+          <AIFeatures />
+        </div>
 
         {/* 上傳按鈕 */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           <button
             onClick={handleUpload}
             disabled={!file || loading}
@@ -335,7 +335,7 @@ export default function Upload() {
         </div>
 
         {loading && (
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
             <p className="text-sm text-gray-600 mt-2">正在進行 OCR 辨識...</p>
           </div>

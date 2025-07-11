@@ -13,6 +13,9 @@ export function Provider({ children }) {
   // 使用者資訊
   const [userProfile, setUserProfile] = useState(null);
   
+  // Profile 版本追蹤
+  const [profileVersion, setProfileVersion] = useState(0);
+  
   // 生成的信件
   const [letter, setLetter] = useState('');
   
@@ -79,6 +82,8 @@ export function Provider({ children }) {
       setMyRole,
       userProfile,
       setUserProfile,
+      profileVersion,
+      setProfileVersion,
       letter,
       setLetter,
       accessToken,

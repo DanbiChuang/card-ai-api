@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 export default function Letter() {
-  const { cardData, myRole, userProfile, letter, setLetter, accessToken, setAccessToken } = useContext(AppCtx);
+  const { cardData, myRole, userProfile, letter, setLetter, accessToken, setAccessToken, profileVersion } = useContext(AppCtx);
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const [subject, setSubject] = useState('');
+  const [shouldRegenerate, setShouldRegenerate] = useState(false); // 追蹤是否需要重新生成
   const navigate = useNavigate();
 
   // 如果沒有必要資料，回到上傳頁
@@ -49,13 +50,40 @@ export default function Letter() {
 
   // 自動生成信件和主旨
   useEffect(() => {
-    if (!letter && cardData && myRole) {
-      generateLetter();
-    }
-    if (!subject && userProfile?.cooperationContent) {
-      setSubject(generateSubject(userProfile.cooperationContent));
+    // 檢查是否有 Profile 資料
+    if (userProfile && myRole) {
+      // 如果沒有信件，首次生成
+      if (!letter && cardData && myRole) {
+        generateLetter();
+      }
+      
+      // 生成主旨
+      if (!subject && userProfile?.cooperationContent) {
+        setSubject(generateSubject(userProfile.cooperationContent));
+      }
     }
   }, [cardData, myRole, userProfile]);
+
+  // 當 Profile 版本變化時，重新生成
+  useEffect(() => {
+    if (profileVersion > 0 && cardData && myRole) {
+      setLetter('');
+      setSubject('');
+      setShouldRegenerate(true);
+    }
+  }, [profileVersion]);
+
+  // 當需要重新生成時，執行生成
+  useEffect(() => {
+    if (shouldRegenerate && cardData && myRole) {
+      generateLetter();
+      // 重新生成主旨
+      if (userProfile?.cooperationContent) {
+        setSubject(generateSubject(userProfile.cooperationContent));
+      }
+      setShouldRegenerate(false);
+    }
+  }, [shouldRegenerate, cardData, myRole]);
 
   const generateLetter = async () => {
     setLoading(true);
@@ -150,8 +178,8 @@ export default function Letter() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">生成合作提案信</h1>
           <p className="text-gray-600">AI 已為您生成合作提案，您可以編輯後寄出</p>
@@ -210,17 +238,9 @@ export default function Letter() {
 
         {/* 主旨編輯 */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700">
-              主旨 *
-            </label>
-            <button
-              onClick={() => setSubject(generateSubject(userProfile?.cooperationContent || ''))}
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              🔄 使用建議主旨
-            </button>
-          </div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            主旨 *
+          </label>
           <input
             type="text"
             value={subject}
@@ -228,9 +248,6 @@ export default function Letter() {
             placeholder="請輸入信件主旨"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <p className="text-sm text-gray-500 mt-1">
-            建議主旨：{generateSubject(userProfile?.cooperationContent || '')}
-          </p>
         </div>
 
         {/* 信件編輯區域 */}
@@ -247,7 +264,6 @@ export default function Letter() {
               {regenerating ? '重新生成中...' : '🔄 重新生成'}
             </button>
           </div>
-          
           {loading ? (
             <div className="border border-gray-300 rounded-lg p-8 text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
@@ -299,13 +315,6 @@ export default function Letter() {
           >
             {sending ? '寄送中...' : '📧 寄出信件'}
           </button>
-        </div>
-
-        {/* 提示資訊 */}
-        <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-blue-800 text-sm">
-            💡 您可以自由編輯主旨和信件內容。點擊「寄出信件」後，系統會自動檢查您的 Google 登入狀態。如果登入已過期，會自動引導您重新登入。
-          </p>
         </div>
       </div>
     </div>

@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 移除全域陰影和邊距 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
