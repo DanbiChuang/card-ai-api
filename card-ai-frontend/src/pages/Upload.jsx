@@ -170,38 +170,38 @@ export default function Upload() {
   };
 
   return (
-    <div className="min-h-screen bg-white w-full">
+    <div className="min-h-screen flex flex-col w-full" style={{ background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)" }}>
       <div className="max-w-4xl mx-auto px-4 py-8 min-h-screen w-full">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-3">Shot2<i>Mail</i></h1>
-          <p className="text-gray-600 text-lg">拍攝或上傳名片照片，AI 幫你生成合作提案</p>
+        <h1 className="text-3xl font-bold text-white mb-3">Shot2<i style={{ fontStyle: 'italic', color: 'white' }}>M<span style={{ color: '#117CFF' }}>a</span><span style={{ color: '#117CFF' }}>i</span>l</i></h1>
+          <p className="text-blue-100 text-lg">拍攝或上傳名片照片，AI 幫你生成合作提案</p>
         </div>
 
         {/* 步驟導覽 */}
         <div className="flex items-center justify-center mb-8">
           <div className="flex items-center">
             <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</div>
-            <div className="text-blue-600 font-medium ml-2">上傳名片</div>
+            <div className="text-blue-600 font-medium ml-2 text-blue-100">上傳名片</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</div>
-            <div className="text-gray-500 font-medium ml-2">確認資訊</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">確認資訊</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</div>
-            <div className="text-gray-500 font-medium ml-2">選擇身份</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">選擇身份</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</div>
-            <div className="text-gray-500 font-medium ml-2">生成信件</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">生成信件</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">5</div>
-            <div className="text-gray-500 font-medium ml-2">寄出</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">寄出</div>
           </div>
         </div>
 
@@ -246,7 +246,7 @@ export default function Upload() {
         )}
 
         {/* 上傳區域 */}
-        <div className="border-2 border-dashed border-gray-300 p-8 text-center mb-8 bg-white">
+        <div className="border-2 border-dashed border-gray-300 p-8 text-center mb-8">
           <input
             ref={fileInputRef}
             type="file"
@@ -264,7 +264,7 @@ export default function Upload() {
                 alt="名片預覽"
                 className="mx-auto max-w-full max-h-48 rounded-lg shadow-sm"
               />
-              <p className="mt-2 text-sm text-gray-600">{file.name}</p>
+              <p className="mt-2 text-sm text-blue-100">{file.name}</p>
               <button
                 onClick={() => {
                   setFile(null);
@@ -291,14 +291,14 @@ export default function Upload() {
                 </button>
               </div>
               
-              <p className="text-sm text-gray-500 mt-3">
+              <p className="text-sm text-blue-100 mt-3">
                 支援 JPG、PNG、HEIC、HEIF、WebP 格式
               </p>
             </div>
           )}
         </div>
         {/* AI功能說明 */}
-        <div className="mb-8">
+        <div>
           <AIFeatures />
         </div>
 
@@ -309,8 +309,8 @@ export default function Upload() {
             disabled={!file || loading}
             className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
               !file || loading
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-blue-900 text-blue-200 cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-400'
             }`}
           >
             {loading ? (
@@ -327,7 +327,7 @@ export default function Upload() {
           </button>
           
           {loading && (
-            <div className="text-center text-sm text-gray-600">
+            <div className="text-center text-sm text-blue-200">
               <p>正在使用AI智能分析名片內容...</p>
               <p className="text-xs mt-1">這可能需要幾秒鐘時間</p>
             </div>
@@ -337,7 +337,7 @@ export default function Upload() {
         {loading && (
           <div className="mt-6 text-center">
             <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-            <p className="text-sm text-gray-600 mt-2">正在進行 OCR 辨識...</p>
+            <p className="text-sm text-blue-200 mt-2">正在進行 OCR 辨識...</p>
           </div>
         )}
       </div>

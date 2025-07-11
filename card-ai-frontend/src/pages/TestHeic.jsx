@@ -57,9 +57,9 @@ export default function TestHeic() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">HEIC 轉換測試</h1>
+    <div className="min-h-screen flex flex-col py-8" style={{ background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)" }}>
+      <div className="max-w-md mx-auto bg-[#222] rounded-lg shadow-md p-6">
+        <h1 className="text-2xl font-bold text-white mb-4">HEIC 轉換測試</h1>
         
         <input
           type="file"
@@ -70,21 +70,21 @@ export default function TestHeic() {
         
         {loading && (
           <div className="text-center mb-4">
-            <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-            <p className="text-sm text-gray-600 mt-2">正在轉換檔案...</p>
+            <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-400"></div>
+            <p className="text-sm text-blue-100 mt-2">正在轉換檔案...</p>
           </div>
         )}
         
         {file && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">檔案資訊:</h3>
-            <p>檔名: {file.name}</p>
-            <p>類型: {file.type}</p>
-            <p>大小: {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            <h3 className="text-lg font-semibold text-white">檔案資訊:</h3>
+            <p className="text-blue-100">檔名: {file.name}</p>
+            <p className="text-blue-100">類型: {file.type}</p>
+            <p className="text-blue-100">大小: {(file.size / 1024 / 1024).toFixed(2)} MB</p>
             
             {previewUrl && (
               <div>
-                <h3 className="text-lg font-semibold">預覽:</h3>
+                <h3 className="text-lg font-semibold text-white">預覽:</h3>
                 <img
                   src={previewUrl}
                   alt="預覽"

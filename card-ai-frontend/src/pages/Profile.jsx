@@ -65,47 +65,47 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)" }}>
       <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">選擇身份</h1>
-          <p className="text-gray-600">請填寫您的資訊並選擇合作方向</p>
+          <h1 className="text-2xl font-bold text-white mb-2">選擇身份</h1>
+          <p className="text-blue-100">請填寫您的資訊並選擇合作方向</p>
         </div>
 
         {/* 步驟導覽 */}
         <div className="flex items-center justify-center mb-6">
           <div className="flex items-center">
-            <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
-            <div className="text-green-600 font-medium ml-2">上傳名片</div>
+            <div className="bg-[#8B8B8B] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
+            <div className="text-[#8B8B8B] font-medium ml-2 text-blue-100">上傳名片</div>
           </div>
-          <div className="w-8 h-0.5 bg-green-600 mx-2"></div>
+          <div className="w-8 h-0.5" style={{ background: '#8B8B8B' }}></div>
           <div className="flex items-center">
-            <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
-            <div className="text-green-600 font-medium ml-2">確認資訊</div>
+            <div className="bg-[#8B8B8B] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
+            <div className="text-[#8B8B8B] font-medium ml-2 text-blue-100">確認資訊</div>
           </div>
           <div className="w-8 h-0.5 bg-blue-600 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</div>
-            <div className="text-blue-600 font-medium ml-2">選擇身份</div>
+            <div className="text-blue-600 font-medium ml-2 text-blue-100">選擇身份</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</div>
-            <div className="text-gray-500 font-medium ml-2">生成信件</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">生成信件</div>
           </div>
           <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
           <div className="flex items-center">
             <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">5</div>
-            <div className="text-gray-500 font-medium ml-2">寄出</div>
+            <div className="text-gray-500 font-medium ml-2 text-blue-200">寄出</div>
           </div>
         </div>
 
         {/* 使用者資訊填寫 */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <h3 className="font-semibold text-blue-800 mb-3">👤 您的資訊</h3>
+        <div className="border border-blue-200 rounded-lg p-4 mb-6">
+          <h3 className="font-semibold text-white mb-3">👤 您的資訊</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="text-sm text-gray-600">姓名 *</label>
+              <label className="text-sm text-blue-100">姓名 *</label>
               <input
                 type="text"
                 value={userInfo.name}
@@ -115,7 +115,7 @@ export default function Profile() {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600">公司 *</label>
+              <label className="text-sm text-blue-100">公司 *</label>
               <input
                 type="text"
                 value={userInfo.company}
@@ -125,7 +125,7 @@ export default function Profile() {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600">職稱</label>
+              <label className="text-sm text-blue-100">職稱</label>
               <input
                 type="text"
                 value={userInfo.title}
@@ -135,7 +135,7 @@ export default function Profile() {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600">電話</label>
+              <label className="text-sm text-blue-100">電話</label>
               <input
                 type="tel"
                 value={userInfo.phone}
@@ -149,7 +149,7 @@ export default function Profile() {
 
         {/* 角色選擇 */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-blue-100 mb-2">
             您的角色 / 合作方向
           </label>
           
@@ -170,7 +170,7 @@ export default function Profile() {
             ))}
             <button
               onClick={() => setShowAddRole(true)}
-              className="px-3 py-1 rounded-full text-sm border border-dashed border-gray-400 text-gray-600 hover:border-blue-400 hover:text-blue-600"
+              className="px-3 py-1 rounded-full text-sm border border-dashed border-gray-400 text-blue-50 hover:border-blue-400 hover:text-blue-600"
             >
               + 新增
             </button>
@@ -182,13 +182,13 @@ export default function Profile() {
             value={role}
             onChange={(e) => setRole(e.target.value)}
             placeholder="例如：台灣新創 BD、軟體工程師、產品經理..."
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-blue-200 rounded-lg px-3 py-2 text-white bg-[#222] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         {/* 合作方向 */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-blue-100 mb-2">
             尋求合作內容 *
           </label>
           <textarea
@@ -196,18 +196,18 @@ export default function Profile() {
             onChange={(e) => setCooperationDirection(e.target.value)}
             placeholder="例如：想談 SaaS 串接合作、技術交流、業務合作、投資機會..."
             rows="3"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-blue-200 rounded-lg px-3 py-2 text-white bg-[#222] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         {/* AI 確認泡泡 */}
         {role && userInfo.name && userInfo.company && cooperationDirection && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+          <div className="p-4 mb-6" style={{ border: '1px solid #BFDBFE', borderRadius: '0.5rem' }}>
             <div className="flex items-start">
-              <div className="text-green-600 mr-3">🤖</div>
+              <div className="text-[#8B8B8B] mr-3">🤖</div>
               <div>
-                <p className="text-green-800 font-medium">AI 確認</p>
-                <p className="text-green-700 text-sm mt-1">
+                <p className="text-blue-100 font-medium">AI 確認</p>
+                <p className="text-blue-100 text-sm mt-1">
                   <strong>{userInfo.name}</strong> ({userInfo.company}) 將以 <strong>{role}</strong> 身分
                   發送合作提案給 <strong>{cardData.name}</strong> ({cardData.company})。
                   <br />
@@ -222,7 +222,7 @@ export default function Profile() {
         <div className="flex gap-3">
           <button
             onClick={() => navigate('/card-review')}
-            className="flex-1 py-3 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex-1 py-3 px-4 border border-blue-200 text-blue-100 rounded-lg hover:bg-blue-900 transition-colors"
           >
             返回確認名片
           </button>
@@ -231,8 +231,8 @@ export default function Profile() {
             disabled={!role || !userInfo.name || !userInfo.company || !cooperationDirection}
             className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
               !role || !userInfo.name || !userInfo.company || !cooperationDirection
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-blue-900 text-blue-200 cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-400'
             }`}
           >
             下一步：生成合作信

@@ -23,13 +23,18 @@ export default function Landing() {
     <div
       className="min-h-screen flex flex-col items-center justify-center"
       style={{
-        background: `radial-gradient(ellipse 120% 90% at 30% 25%, #005EFF 40%, #003080 70%, transparent 100%), linear-gradient(120deg, #005EFF 0%, #003080 60%, #000018 100%)`,
+        background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)",
       }}
     >
       <div className="flex flex-col items-center">
         <h1 className="text-white text-6xl mb-6 tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>
           <span style={{ fontWeight: 600, fontStyle: 'normal' }}>Shot2</span>
-          <span style={{ fontWeight: 600, fontStyle: 'italic' }}>Mail</span>
+          <span style={{ fontWeight: 600, fontStyle: 'italic' }}>
+            M
+            <span style={{ color: '#117CFF' }}>a</span>
+            <span style={{ color: '#117CFF' }}>i</span>
+            l
+          </span>
         </h1>
         <p
           className="text-white text-xl mb-12"
