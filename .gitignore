@@ -6,6 +6,8 @@ node_modules/
 
 # 忽略環境變數檔案
 .env
+.env.local
+.env.backup
 
 # 其他常見忽略
 .DS_Store

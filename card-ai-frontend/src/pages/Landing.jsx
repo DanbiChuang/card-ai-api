@@ -21,13 +21,13 @@ export default function Landing() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center"
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
       style={{
         background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)",
       }}
     >
-      <div className="flex flex-col items-center">
-        <h1 className="text-white text-6xl mb-6 tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="flex flex-col items-center max-w-md w-full">
+        <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6 tracking-wide text-center" style={{ fontFamily: 'Inter, sans-serif' }}>
           <span style={{ fontWeight: 600, fontStyle: 'normal' }}>Shot2</span>
           <span style={{ fontWeight: 600, fontStyle: 'italic' }}>
             M
@@ -37,14 +37,14 @@ export default function Landing() {
           </span>
         </h1>
         <p
-          className="text-white text-xl mb-12"
+          className="text-white text-lg sm:text-xl mb-8 sm:mb-12 text-center px-4"
           style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
         >
           Snap a Card. Seal the Deal.
         </p>
         <button
           onClick={handleLogin}
-          className="px-4 py-2 border border-white text-white rounded-[20px] text-lg transition-colors"
+          className="px-6 sm:px-8 py-3 sm:py-4 border border-white text-white rounded-[20px] text-base sm:text-lg transition-colors w-full sm:w-auto"
           style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300 }}
         >
           Login & Start

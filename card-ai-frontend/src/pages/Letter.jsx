@@ -179,55 +179,55 @@ export default function Letter() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(to bottom, #4F4F4F 0%, #000000 100%)" }}>
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-white mb-2">生成合作提案信</h1>
-          <p className="text-blue-100">AI 已為您生成合作提案，您可以編輯後寄出</p>
+      <div className="max-w-4xl mx-auto p-4 sm:p-6">
+        <div className="text-center mb-4 sm:mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">生成合作提案信</h1>
+          <p className="text-blue-100 text-sm sm:text-base">AI 已為您生成合作提案，您可以編輯後寄出</p>
         </div>
 
-        {/* 步驟導覽 */}
-        <div className="flex items-center justify-center mb-6">
+        {/* 步驟導覽 - 改善手機版顯示 */}
+        <div className="flex flex-wrap items-center justify-center mb-4 sm:mb-6 gap-2 sm:gap-4">
           <div className="flex items-center">
-            <div className="bg-[#8B8B8B] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
-            <div className="text-[#8B8B8B] font-medium ml-2 text-blue-100">上傳名片</div>
+            <div className="bg-[#8B8B8B] text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold">✓</div>
+            <div className="text-[#8B8B8B] font-medium ml-1 sm:ml-2 text-blue-100 text-xs sm:text-sm">上傳名片</div>
           </div>
-          <div className="w-8 h-0.5" style={{ background: '#8B8B8B' }}></div>
+          <div className="w-4 sm:w-8 h-0.5" style={{ background: '#8B8B8B' }}></div>
           <div className="flex items-center">
-            <div className="bg-[#8B8B8B] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
-            <div className="text-[#8B8B8B] font-medium ml-2 text-blue-100">確認資訊</div>
+            <div className="bg-[#8B8B8B] text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold">✓</div>
+            <div className="text-[#8B8B8B] font-medium ml-1 sm:ml-2 text-blue-100 text-xs sm:text-sm">確認資訊</div>
           </div>
-          <div className="w-8 h-0.5" style={{ background: '#8B8B8B' }}></div>
+          <div className="w-4 sm:w-8 h-0.5" style={{ background: '#8B8B8B' }}></div>
           <div className="flex items-center">
-            <div className="bg-[#8B8B8B] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✓</div>
-            <div className="text-[#8B8B8B] font-medium ml-2 text-blue-100">選擇身份</div>
+            <div className="bg-[#8B8B8B] text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold">✓</div>
+            <div className="text-[#8B8B8B] font-medium ml-1 sm:ml-2 text-blue-100 text-xs sm:text-sm">選擇身份</div>
           </div>
-          <div className="w-8 h-0.5 bg-blue-600 mx-2"></div>
+          <div className="w-4 sm:w-8 h-0.5 bg-blue-600 mx-1 sm:mx-2"></div>
           <div className="flex items-center">
-            <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</div>
-            <div className="text-blue-600 font-medium ml-2 text-blue-100">生成信件</div>
+            <div className="bg-blue-600 text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold">4</div>
+            <div className="text-blue-600 font-medium ml-1 sm:ml-2 text-blue-100 text-xs sm:text-sm">生成信件</div>
           </div>
-          <div className="w-8 h-0.5 bg-gray-300 mx-2"></div>
+          <div className="w-4 sm:w-8 h-0.5 bg-gray-300 mx-1 sm:mx-2"></div>
           <div className="flex items-center">
-            <div className="bg-gray-300 text-gray-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">5</div>
-            <div className="text-gray-500 font-medium ml-2 text-blue-200">寄出</div>
+            <div className="bg-gray-300 text-gray-500 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold">5</div>
+            <div className="text-gray-500 font-medium ml-1 sm:ml-2 text-blue-200 text-xs sm:text-sm">寄出</div>
           </div>
         </div>
 
         {/* 信件資訊 */}
-        <div className="p-4 mb-6" style={{ border: '1px solid #4F4F4F', borderRadius: '0.5rem' }}>
-          <h3 className="font-semibold text-white mb-2">📧 信件資訊</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div className="p-3 sm:p-4 mb-4 sm:mb-6" style={{ border: '1px solid #4F4F4F', borderRadius: '0.5rem' }}>
+          <h3 className="font-semibold text-white mb-2 text-sm sm:text-base">📧 信件資訊</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
             <div>
-              <h4 className="font-medium text-blue-100 mb-2">寄件人</h4>
-              <div className="space-y-1">
+              <h4 className="font-medium text-blue-100 mb-1 sm:mb-2 text-xs sm:text-sm">寄件人</h4>
+              <div className="space-y-0.5 sm:space-y-1">
                 <div><span className="text-blue-100">姓名：</span><span className="font-medium text-white">{userProfile.name}</span></div>
                 <div><span className="text-blue-100">公司：</span><span className="font-medium text-white">{userProfile.company}</span></div>
                 <div><span className="text-blue-100">身份：</span><span className="font-medium text-white">{myRole}</span></div>
               </div>
             </div>
             <div>
-              <h4 className="font-medium text-blue-100 mb-2">收件人</h4>
-              <div className="space-y-1">
+              <h4 className="font-medium text-blue-100 mb-1 sm:mb-2 text-xs sm:text-sm">收件人</h4>
+              <div className="space-y-0.5 sm:space-y-1">
                 <div><span className="text-blue-100">姓名：</span><span className="font-medium text-white">{cardData.name || '未辨識'}</span></div>
                 <div><span className="text-blue-100">公司：</span><span className="font-medium text-white">{cardData.company || '未辨識'}</span></div>
                 <div><span className="text-blue-100">Email：</span><span className="font-medium text-white">{cardData.email || '未辨識'}</span></div>
@@ -237,8 +237,8 @@ export default function Letter() {
         </div>
 
         {/* 主旨編輯 */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-blue-100 mb-2">
+        <div className="mb-4 sm:mb-6">
+          <label className="block text-xs sm:text-sm font-medium text-blue-100 mb-1 sm:mb-2">
             主旨 *
           </label>
           <input
@@ -246,47 +246,47 @@ export default function Letter() {
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             placeholder="請輸入信件主旨"
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
           />
         </div>
 
         {/* 信件編輯區域 */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <label className="block text-sm font-medium text-blue-100">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <label className="block text-xs sm:text-sm font-medium text-blue-100">
               合作提案信內容
             </label>
             <button
               onClick={regenerateLetter}
               disabled={regenerating}
-              className="text-sm text-blue-600 hover:text-blue-800 disabled:text-gray-400"
+              className="text-xs sm:text-sm text-blue-600 hover:text-blue-800 disabled:text-gray-400"
             >
               {regenerating ? '重新生成中...' : '🔄 重新生成'}
             </button>
           </div>
           {loading ? (
-            <div className="border border-gray-300 rounded-lg p-8 text-center">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-              <p className="text-blue-100">AI 正在生成合作提案信...</p>
+            <div className="border border-gray-300 rounded-lg p-6 sm:p-8 text-center">
+              <div className="inline-block animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600 mb-3 sm:mb-4"></div>
+              <p className="text-blue-100 text-sm sm:text-base">AI 正在生成合作提案信...</p>
             </div>
           ) : (
             <textarea
               value={letter}
               onChange={(e) => setLetter(e.target.value)}
               placeholder="AI 正在生成信件內容..."
-              rows="15"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
+              rows="12"
+              className="w-full border border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y text-sm sm:text-base"
             />
           )}
         </div>
 
         {/* AI建議 */}
-        <div className="p-4 mb-6" style={{ border: '1px solid #4F4F4F', borderRadius: '0.5rem' }}>
+        <div className="p-3 sm:p-4 mb-4 sm:mb-6" style={{ border: '1px solid #4F4F4F', borderRadius: '0.5rem' }}>
           <div className="flex items-start">
-            <div className="text-[#8B8B8B] mr-3">🤖</div>
+            <div className="text-[#8B8B8B] mr-2 sm:mr-3 text-sm sm:text-base">🤖</div>
             <div>
-              <p className="font-medium" style={{ color: '#8B8B8B' }}>AI 建議</p>
-              <p className="text-sm mt-1" style={{ color: '#8B8B8B' }}>
+              <p className="font-medium text-xs sm:text-sm" style={{ color: '#8B8B8B' }}>AI 建議</p>
+              <p className="text-xs sm:text-sm mt-1" style={{ color: '#8B8B8B' }}>
                 這封信已經針對 {cardData.company} 和您的 {myRole} 角色進行了優化。
                 您可以自由編輯內容，或點擊「重新生成」讓 AI 調整語氣和重點。
               </p>
@@ -295,17 +295,17 @@ export default function Letter() {
         </div>
 
         {/* 操作按鈕 */}
-        <div className="flex gap-3">
+        <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3">
           <button
             onClick={() => navigate('/profile')}
-            className="flex-1 py-3 px-4 border border-blue-200 text-blue-100 rounded-lg hover:bg-blue-900 transition-colors"
+            className="flex-1 py-2 sm:py-3 px-3 sm:px-4 border border-blue-200 text-blue-100 rounded-lg hover:bg-blue-900 transition-colors text-sm sm:text-base"
           >
             返回身份設定
           </button>
           <button
             onClick={handleSend}
             disabled={sending || !cardData.email}
-            className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+            className={`flex-1 py-2 sm:py-3 px-3 sm:px-4 rounded-lg font-medium transition-colors text-sm sm:text-base ${
               !cardData.email || sending
                 ? 'bg-blue-900 text-blue-200 cursor-not-allowed'
                 : 'bg-blue-600 text-white hover:bg-blue-400'
