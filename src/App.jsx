@@ -8,6 +8,7 @@ import Letter from './pages/Letter.jsx';
 import Success from './pages/Success.jsx';
 import OAuth from './pages/OAuth.jsx';
 import TestHeic from './pages/TestHeic.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 export default function App() {
   return (
@@ -15,10 +16,26 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/card-review" element={<CardReview />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/letter" element={<Letter />} />
+          <Route path="/upload" element={
+            <ProtectedRoute>
+              <Upload />
+            </ProtectedRoute>
+          } />
+          <Route path="/card-review" element={
+            <ProtectedRoute>
+              <CardReview />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/letter" element={
+            <ProtectedRoute>
+              <Letter />
+            </ProtectedRoute>
+          } />
           <Route path="/success" element={<Success />} />
           <Route path="/oauth2callback" element={<OAuth />} />
           <Route path="/test-heic" element={<TestHeic />} />
